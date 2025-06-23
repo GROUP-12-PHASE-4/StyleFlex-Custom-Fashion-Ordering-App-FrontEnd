@@ -1,1 +1,1 @@
-# StyleFlex-Custom-Fashion-Ordering-FontEnd-App
+# StyleFlex-Custom-Fashion-Ordering-FrontEnd-App
