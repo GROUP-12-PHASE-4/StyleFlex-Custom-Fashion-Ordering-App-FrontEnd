@@ -30,6 +30,7 @@ function App() {
           />
           <Route path="*" element={<NotFound />} />
           <Route path="/order/:id" element={<OrderForm />} />
+          <Route path="/admin/orders" element={<AdminOrders />} />
         </Routes>
       </div>
     </BrowserRouter>
