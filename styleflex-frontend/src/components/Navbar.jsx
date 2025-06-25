@@ -29,9 +29,5 @@ function Navbar() {
             <button onClick={handleLogout} className="hover:underline">
               Logout
             </button>
-          </>
-        ) : (
-          <>
-            <Link to="/login" className="hover:underline">
-              Login
+         
          
