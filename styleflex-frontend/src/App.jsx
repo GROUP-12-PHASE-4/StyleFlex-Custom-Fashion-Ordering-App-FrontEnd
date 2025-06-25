@@ -9,10 +9,12 @@ import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DesignGallery from "./pages/DesignGallery";
 import OrderForm from "./pages/OrderForm";
+import Footer from "./components/Footer";
 
 function App() {
   return (
     <BrowserRouter>
+     <div>
       <Navbar />
       <div className="px-4 py-6">
         <Routes>
@@ -34,6 +36,8 @@ function App() {
           <Route path="/profile" element={<Profile />} />
         </Routes>
       </div>
+      <Footer /> 
+     </div>
     </BrowserRouter>
   );
 }

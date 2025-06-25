@@ -26,6 +26,7 @@ function Navbar() {
             <Link to="/orders" className="hover:underline">
               My Orders
             </Link>
+            <Link to="/profile" className="hover:underline"> Profile </Link>
             <button onClick={handleLogout} className="hover:underline">
               Logout
             </button>
