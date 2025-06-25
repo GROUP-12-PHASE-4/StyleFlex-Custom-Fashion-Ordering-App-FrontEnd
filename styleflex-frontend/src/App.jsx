@@ -8,6 +8,7 @@ import Orders from "./pages/Orders";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
 import DesignGallery from "./pages/DesignGallery";
+import OrderForm from "./pages/OrderForm";
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             }
           />
           <Route path="*" element={<NotFound />} />
+          <Route path="/order/:id" element={<OrderForm />} />
         </Routes>
       </div>
     </BrowserRouter>
