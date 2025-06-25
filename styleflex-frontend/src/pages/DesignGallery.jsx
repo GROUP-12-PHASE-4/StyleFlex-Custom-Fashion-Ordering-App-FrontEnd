@@ -37,10 +37,4 @@ function DesignGallery() {
             <h3 className="text-xl font-semibold">{design.title}</h3>
             <p className="text-sm text-gray-600">{design.category}</p>
             <p className="text-sm mt-2">{design.description}</p>
-            <Link
-              to={`/order/${design.id}`}
-              className="inline-block mt-4 px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700"
-            >
-              OrderNow
-            </Link>
-          </div>
+        
