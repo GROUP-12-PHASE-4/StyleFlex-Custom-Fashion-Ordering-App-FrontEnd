@@ -47,11 +47,4 @@ function Login() {
         user: data.user || null, // if backend returns user info
       });
 
-      navigate("/orders");
-    } catch (err) {
-      setError(err.message);
-    }
-  };
-
-  r
-      
+    
