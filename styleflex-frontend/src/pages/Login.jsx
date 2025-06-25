@@ -54,16 +54,7 @@ function Login() {
   };
 
   r
-          placeholder="Username"
-          className="w-full border border-gray-300 px-3 py-2 rounded"
-          value={formData.username}
-          onChange={handleChange}
-          required
-        />
-        <input
-          type="password"
-          name="password"
-          placeholder="Password"
+        ord"
           className="w-full border border-gray-300 px-3 py-2 rounded"
           value={formData.password}
           onChange={handleChange}
