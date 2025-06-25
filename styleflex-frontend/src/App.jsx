@@ -7,7 +7,7 @@ import Signup from './pages/Signup';
 import Orders from "./pages/Orders";
 import NotFound from "./pages/NotFound";
 import ProtectedRoute from "./components/ProtectedRoute";
-
+import DesignGallery from "./pages/DesignGallery";
 function App() {
   return (
     <BrowserRouter>
@@ -18,6 +18,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/orders" element={
+          <Route path="/designs" element={<DesignGallery />} />
             <ProtectedRoute>
               <Orders />
             </ProtectedRoute>
