@@ -53,13 +53,7 @@ function Login() {
     }
   };
 
-  return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-md rounded">
-      <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
-        <input
-          type="text"
-          name="username"
+  r
           placeholder="Username"
           className="w-full border border-gray-300 px-3 py-2 rounded"
           value={formData.username}
