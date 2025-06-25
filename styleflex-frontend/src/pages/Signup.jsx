@@ -8,7 +8,7 @@ function Signup() {
     password: '',
   });
 
- const [message, setMessage] = useState('');
+  const [message, setMessage] = useState('');
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -23,3 +23,46 @@ function Signup() {
       setMessage(err.response?.data?.message || 'Signup failed.');
     }
   }
+
+  return (
+    <div className="max-w-md mx-auto mt-10 bg-white shadow-md p-6 rounded-md">
+      <h2 className="text-xl font-semibold mb-4">Sign Up</h2>
+      <form onSubmit={handleSubmit} className="space-y-4">
+        <input
+          name="username"
+          placeholder="Username"
+          className="w-full p-2 border rounded"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="email"
+          type="email"
+          placeholder="Email"
+          className="w-full p-2 border rounded"
+          onChange={handleChange}
+          required
+        />
+        <input
+          name="password"
+          type="password"
+          placeholder="Password"
+          className="w-full p-2 border rounded"
+          onChange={handleChange}
+          required
+        />
+        <button
+          type="submit"
+          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
+        >
+          Sign Up
+        </button>
+      </form>
+      {message && (
+        <p className="mt-4 text-sm text-center text-gray-700">{message}</p>
+      )}
+    </div>
+  );
+}
+
+export default Signup;
