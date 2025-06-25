@@ -33,21 +33,37 @@ function Orders() {
   }, [auth?.accessToken]);
 
   return (
-    <div className="max-w-3xl mx-auto p-4">
-      <h2 className="text-2xl font-semibold mb-4">Orders</h2>
+    <div className="max-w-5xl mx-auto mt-10 p-6">
+      <h1 className="text-3xl font-bold mb-6">Your Orders</h1>
       {error && <p className="text-red-500">{error}</p>}
-      {orders.length === 0 && !error && <p>No orders yet.</p>}
-
-      <ul className="space-y-4">
-        {orders.map((order) => (
-          <li key={order.id} className="border p-4 rounded shadow">
-            <p><strong>Design:</strong> {order.design?.title}</p>
-            <p><strong>Size:</strong> {order.size || "N/A"}</p>
-            <p><strong>Measurements:</strong> {order.measurements}</p>
-            <p><strong>Status:</strong> <span className="text-blue-600">{order.status}</span></p>
-          </li>
-        ))}
-      </ul>
+      {orders.length === 0 && !error ? (
+        <p>No orders found.</p>
+      ) : (
+        <div className="grid gap-4">
+          {orders.map((order) => (
+            <div
+              key={order.id}
+              className="border rounded p-4 shadow hover:bg-gray-50 transition"
+            >
+              <h2 className="text-xl font-semibold mb-2">
+                {order.design?.title || "No Design Info"}
+              </h2>
+              <p className="text-sm text-gray-600">
+                Size: {order.size} | Status:{" "}
+                <span className="font-medium">{order.status}</span>
+              </p>
+              <p className="text-sm text-gray-600">
+                Ordered on: {new Date(order.created_at).toLocaleString()}
+              </p>
+              {order.measurements && (
+                <p className="text-sm mt-2">
+                  <strong>Measurements:</strong> {order.measurements}
+                </p>
+              )}
+            </div>
+          ))}
+        </div>
+      )}
     </div>
   );
 }
