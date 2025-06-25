@@ -16,18 +16,7 @@ function Navbar() {
   };
 
   return (
-    <nav className="bg-blue-800 p-4 text-white flex justify-between items-center">
-      <h1 className="text-xl font-bold">
-        <Link to="/">StyleFlex</Link>
-      </h1>
-      <div className="space-x-4">
-        {isLoggedIn ? (
-          <>
-            <Link to="/orders" className="hover:underline">
-              My Orders
-            </Link>
-            <button onClick={handleLogout} className="hover:underline">
-              Logout
+    
             </button>
          
          
