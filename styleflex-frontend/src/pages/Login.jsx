@@ -13,13 +13,5 @@ function Login() {
 
   const [error, setError] = useState(null);
 
-  const handleChange = (e) => {
-   n", data.access_token); // Match token name in other components
-
-      setAuth({
-        isAuthenticated: true,
-        accessToken: data.access_token,
-        user: data.user || null, // if backend returns user info
-      });
-
+  
     
