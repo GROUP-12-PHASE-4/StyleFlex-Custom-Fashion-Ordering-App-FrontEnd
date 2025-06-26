@@ -1,3 +1,4 @@
+
 import React, { createContext, useState, useEffect } from "react";
 
 export const AuthContext = createContext();
@@ -10,7 +11,7 @@ export const AuthProvider = ({ children }) => {
   });
 
   useEffect(() => {
-    const token = localStorage.getItem("access_token"); // 🔄 MATCH your token name from other files
+    const token = localStorage.getItem("access_token");
     if (token) {
       setAuth((prev) => ({
         ...prev,
