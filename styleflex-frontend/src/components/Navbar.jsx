@@ -26,7 +26,9 @@ function Navbar() {
             <Link to="/orders" className="hover:underline">
               My Orders
             </Link>
-            <Link to="/profile" className="hover:underline"> Profile </Link>
+            <Link to="/profile" className="hover:underline">
+              Profile
+            </Link>
             <button onClick={handleLogout} className="hover:underline">
               Logout
             </button>
@@ -36,7 +38,7 @@ function Navbar() {
             <Link to="/login" className="hover:underline">
               Login
             </Link>
-            <Link to="/register" className="hover:underline">
+            <Link to="/signup" className="hover:underline"> {/* ✅ corrected route */}
               Register
             </Link>
           </>
