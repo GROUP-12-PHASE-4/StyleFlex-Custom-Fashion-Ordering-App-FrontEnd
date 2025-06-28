@@ -1,25 +1,22 @@
 import { useEffect, useState } from "react";
 import { useParams, useNavigate } from "react-router-dom";
+import API from "../services/api"; 
 
 function OrderForm() {
-  const { id } = useParams(); // design ID from URL
+  const { id } = useParams();
   const [design, setDesign] = useState(null);
   const [size, setSize] = useState("");
   const [measurements, setMeasurements] = useState("");
   const [error, setError] = useState(null);
   const navigate = useNavigate();
-  const token = localStorage.getItem("accessToken");
+  const token = localStorage.getItem("access_token"); 
 
   useEffect(() => {
-    fetch("https://your-backend-url.onrender.com/api/designs")
-      .then((res) => res.json())
-      .then((data) => {
-        const found = data.find((d) => d.id === parseInt(id));
-        if (found) {
-          setDesign(found);
-        } else {
-          setError("Design not found.");
-        }
+    API.get("/designs")
+      .then((res) => {
+        const found = res.data.find((d) => d.id === parseInt(id));
+        if (found) setDesign(found);
+        else setError("Design not found.");
       })
       .catch(() => setError("Failed to load design."));
   }, [id]);
@@ -27,28 +24,24 @@ function OrderForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/api/orders", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-        body: JSON.stringify({
+      const res = await API.post(
+        "/orders",
+        {
           design_id: parseInt(id),
           size,
           measurements,
-        }),
-      });
-
-      if (!res.ok) {
-        const err = await res.json();
-        throw new Error(err.message || "Order failed.");
-      }
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${token}`,
+          },
+        }
+      );
 
       alert("Order placed successfully!");
       navigate("/orders");
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || "Order failed.");
     }
   };
 

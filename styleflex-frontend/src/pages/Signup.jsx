@@ -9,6 +9,7 @@ function Signup() {
   });
 
   const [message, setMessage] = useState('');
+  const [error, setError] = useState('');
 
   function handleChange(e) {
     setFormData({ ...formData, [e.target.name]: e.target.value });
@@ -16,11 +17,16 @@ function Signup() {
 
   async function handleSubmit(e) {
     e.preventDefault();
+    setMessage('');
+    setError('');
+
     try {
-      const res = await API.post('/signup', formData);
+      console.log("Submitting signup:", formData);
+      const res = await API.post('/register', formData);
       setMessage(res.data.message || 'Signup successful!');
     } catch (err) {
-      setMessage(err.response?.data?.message || 'Signup failed.');
+      console.error(err);
+      setError(err.response?.data?.message || 'Signup failed.');
     }
   }
 
@@ -33,6 +39,7 @@ function Signup() {
           placeholder="Username"
           className="w-full p-2 border rounded"
           onChange={handleChange}
+          value={formData.username}
           required
         />
         <input
@@ -41,6 +48,7 @@ function Signup() {
           placeholder="Email"
           className="w-full p-2 border rounded"
           onChange={handleChange}
+          value={formData.email}
           required
         />
         <input
@@ -49,6 +57,7 @@ function Signup() {
           placeholder="Password"
           className="w-full p-2 border rounded"
           onChange={handleChange}
+          value={formData.password}
           required
         />
         <button
@@ -58,8 +67,12 @@ function Signup() {
           Sign Up
         </button>
       </form>
+
       {message && (
-        <p className="mt-4 text-sm text-center text-gray-700">{message}</p>
+        <p className="mt-4 text-sm text-center text-green-600">{message}</p>
+      )}
+      {error && (
+        <p className="mt-4 text-sm text-center text-red-500">{error}</p>
       )}
     </div>
   );

@@ -25,7 +25,7 @@ function Login() {
     setError(null);
 
     try {
-      const res = await fetch("https://your-backend-url.onrender.com/api/login", {
+      const res = await fetch("https://styleflex-custom-fashion-ordering-app.onrender.com/api/login", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -39,12 +39,12 @@ function Login() {
         throw new Error(data.message || "Login failed");
       }
 
-      localStorage.setItem("access_token", data.access_token); // Match token name in other components
+      localStorage.setItem("access_token", data.access_token); 
 
       setAuth({
         isAuthenticated: true,
         accessToken: data.access_token,
-        user: data.user || null, // if backend returns user info
+        user: data.user || null, 
       });
 
       navigate("/orders");
