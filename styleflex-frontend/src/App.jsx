@@ -12,13 +12,14 @@ import Footer from "./components/Footer";
 import AdminOrders from './pages/AdminOrders';
 import Profile from './pages/Profile';
 import NotFound from './pages/NotFound';
+import './App.css'; 
 
 function App() {
   return (
     <BrowserRouter>
-      <div>
+      <div className="app-container">
         <Navbar />
-        <div className="px-4 py-6">
+        <main className="main-content">
           <Routes>
             <Route path="/" element={<Home />} />
             <Route path="/login" element={<Login />} />
@@ -37,7 +38,7 @@ function App() {
             <Route path="/profile" element={<Profile />} />
             <Route path="*" element={<NotFound />} />
           </Routes>
-        </div>
+        </main>
         <Footer />
       </div>
     </BrowserRouter>

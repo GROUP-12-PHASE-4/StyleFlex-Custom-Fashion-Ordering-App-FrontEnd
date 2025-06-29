@@ -1,5 +1,6 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
+import "../App.css"; 
 
 function Orders() {
   const { auth } = useContext(AuthContext);
@@ -40,36 +41,33 @@ function Orders() {
   };
 
   return (
-    <div className="max-w-5xl mx-auto mt-10 p-6">
-      <h1 className="text-3xl font-bold mb-6">Your Orders</h1>
-      {error && <p className="text-red-500">{error}</p>}
+    <div className="orders-container">
+      <h1 className="orders-title">Your Orders</h1>
+      {error && <p className="error-message">{error}</p>}
       {orders.length === 0 && !error ? (
-        <p className="text-gray-500">No orders found or still loading...</p>
+        <p className="orders-empty">No orders found or still loading...</p>
       ) : (
-        <div className="grid gap-4">
+        <div className="orders-grid">
           {orders.map((order) => (
-            <div
-              key={order.id}
-              className="border rounded p-4 shadow hover:bg-gray-50 transition"
-            >
-              <h2 className="text-xl font-semibold mb-2">
+            <div key={order.id} className="order-card">
+              <h2 className="order-title">
                 {order.design?.title || "No Design Info"}
               </h2>
-              <p className="text-sm text-gray-600">
+              <p className="order-meta">
                 Size: {order.size} | Status:{" "}
-                <span className="font-medium">{order.status}</span>
+                <span className="order-status">{order.status}</span>
               </p>
-              <p className="text-sm text-gray-600">
+              <p className="order-meta">
                 Ordered on: {new Date(order.created_at).toLocaleString()}
               </p>
               {order.measurements && (
-                <p className="text-sm mt-2">
+                <p className="order-measurements">
                   <strong>Measurements:</strong> {order.measurements}
                 </p>
               )}
 
               <button
-                className="mt-4 px-4 py-2 bg-purple-600 text-white rounded hover:bg-purple-700"
+                className="order-button"
                 onClick={() => handleMakeOffer(order.id)}
               >
                 Make Offer

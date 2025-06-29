@@ -1,6 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
+import "../App.css"; 
 
 function Login() {
   const { setAuth } = useContext(AuthContext);
@@ -39,12 +40,12 @@ function Login() {
         throw new Error(data.message || "Login failed");
       }
 
-      localStorage.setItem("access_token", data.access_token); 
+      localStorage.setItem("access_token", data.access_token);
 
       setAuth({
         isAuthenticated: true,
         accessToken: data.access_token,
-        user: data.user || null, 
+        user: data.user || null,
       });
 
       navigate("/orders");
@@ -54,14 +55,14 @@ function Login() {
   };
 
   return (
-    <div className="max-w-md mx-auto mt-20 p-6 bg-white shadow-md rounded">
-      <h2 className="text-2xl font-bold mb-4 text-center">Login</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="login-container">
+      <h2 className="login-title">Login</h2>
+      <form onSubmit={handleSubmit} className="login-form">
         <input
           type="text"
           name="username"
           placeholder="Username"
-          className="w-full border border-gray-300 px-3 py-2 rounded"
+          className="login-input"
           value={formData.username}
           onChange={handleChange}
           required
@@ -70,18 +71,15 @@ function Login() {
           type="password"
           name="password"
           placeholder="Password"
-          className="w-full border border-gray-300 px-3 py-2 rounded"
+          className="login-input"
           value={formData.password}
           onChange={handleChange}
           required
         />
-        <button
-          type="submit"
-          className="w-full bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700 transition-colors"
-        >
+        <button type="submit" className="login-button">
           Login
         </button>
-        {error && <p className="text-red-500 text-sm text-center">{error}</p>}
+        {error && <p className="login-error">{error}</p>}
       </form>
     </div>
   );

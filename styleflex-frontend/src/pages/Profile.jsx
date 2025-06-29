@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../App.css"; 
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -14,7 +15,7 @@ const Profile = () => {
       const token = localStorage.getItem("access_token");
       const response = await axios.get("/api/profile", {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       });
       setProfile((prev) => ({
@@ -38,11 +39,10 @@ const Profile = () => {
       const token = localStorage.getItem("access_token");
       await axios.put("/api/profile", profile, {
         headers: {
-          Authorization: `Bearer ${token}`, 
+          Authorization: `Bearer ${token}`,
         },
       });
       setMessage("✅ Profile updated successfully!");
-      
       setProfile((prev) => ({ ...prev, password: "" }));
     } catch (err) {
       setMessage("❌ Failed to update profile.");
@@ -50,29 +50,25 @@ const Profile = () => {
     }
   };
 
-  useEffect(() => {
-    fetchProfile();
-  }, []);
-
   return (
-    <div className="p-4 max-w-xl mx-auto">
-      <h2 className="text-xl font-bold mb-4">Your Profile</h2>
-      {message && <div className="mb-2 text-sm">{message}</div>}
+    <div className="profile-container">
+      <h2 className="profile-title">Your Profile</h2>
+      {message && <div className="profile-message">{message}</div>}
 
-      <form onSubmit={handleSubmit} className="space-y-3">
+      <form onSubmit={handleSubmit} className="profile-form">
         <input
           name="username"
           value={profile.username}
           onChange={handleChange}
           placeholder="Username"
-          className="w-full border p-2 rounded"
+          className="profile-input"
         />
         <input
           name="email"
           value={profile.email}
           onChange={handleChange}
           placeholder="Email"
-          className="w-full border p-2 rounded"
+          className="profile-input"
         />
         <input
           type="password"
@@ -80,12 +76,9 @@ const Profile = () => {
           value={profile.password}
           onChange={handleChange}
           placeholder="New Password (optional)"
-          className="w-full border p-2 rounded"
+          className="profile-input"
         />
-        <button
-          type="submit"
-          className="bg-blue-600 text-white px-4 py-2 rounded hover:bg-blue-700"
-        >
+        <button type="submit" className="profile-button">
           Update Profile
         </button>
       </form>

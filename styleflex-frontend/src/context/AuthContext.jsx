@@ -15,12 +15,12 @@ export const AuthProvider = ({ children }) => {
     const refreshToken = localStorage.getItem("refresh_token");
 
     if (accessToken) {
-      setAuth({
+      setAuth((prev) => ({
+        ...prev,
         isAuthenticated: true,
         accessToken,
         refreshToken,
-        user: null, // You can set user details if stored
-      });
+      }));
     }
   }, []);
 

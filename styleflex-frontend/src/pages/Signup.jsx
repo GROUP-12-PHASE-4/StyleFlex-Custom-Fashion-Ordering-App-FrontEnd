@@ -1,5 +1,6 @@
 import { useState } from 'react';
 import API from '../services/api';
+import '../App.css'; 
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -31,13 +32,13 @@ function Signup() {
   }
 
   return (
-    <div className="max-w-md mx-auto mt-10 bg-white shadow-md p-6 rounded-md">
-      <h2 className="text-xl font-semibold mb-4">Sign Up</h2>
-      <form onSubmit={handleSubmit} className="space-y-4">
+    <div className="signup-container">
+      <h2 className="signup-title">Sign Up</h2>
+      <form onSubmit={handleSubmit} className="signup-form">
         <input
           name="username"
           placeholder="Username"
-          className="w-full p-2 border rounded"
+          className="signup-input"
           onChange={handleChange}
           value={formData.username}
           required
@@ -46,7 +47,7 @@ function Signup() {
           name="email"
           type="email"
           placeholder="Email"
-          className="w-full p-2 border rounded"
+          className="signup-input"
           onChange={handleChange}
           value={formData.email}
           required
@@ -55,25 +56,18 @@ function Signup() {
           name="password"
           type="password"
           placeholder="Password"
-          className="w-full p-2 border rounded"
+          className="signup-input"
           onChange={handleChange}
           value={formData.password}
           required
         />
-        <button
-          type="submit"
-          className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600"
-        >
+        <button type="submit" className="signup-button">
           Sign Up
         </button>
       </form>
 
-      {message && (
-        <p className="mt-4 text-sm text-center text-green-600">{message}</p>
-      )}
-      {error && (
-        <p className="mt-4 text-sm text-center text-red-500">{error}</p>
-      )}
+      {message && <p className="signup-success">{message}</p>}
+      {error && <p className="signup-error">{error}</p>}
     </div>
   );
 }

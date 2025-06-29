@@ -1,18 +1,19 @@
 import React from "react";
+import "../App.css";
 
 const Footer = () => {
   return (
-    <footer className="bg-gray-100 text-center text-sm text-gray-600 py-4 mt-10 border-t">
-      <div className="max-w-screen-lg mx-auto px-4">
+    <footer className="footer">
+      <div className="footer-container">
         <p>&copy; {new Date().getFullYear()} StyleFlex. All rights reserved.</p>
-        <div className="mt-2 flex justify-center gap-4">
-          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+        <div className="footer-links">
+          <a href="https://facebook.com" target="_blank" rel="noopener noreferrer">
             Facebook
           </a>
-          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer" className="hover:underline">
+          <a href="https://instagram.com" target="_blank" rel="noopener noreferrer">
             Instagram
           </a>
-          <a href="mailto:contact@styleflex.com" className="hover:underline">
+          <a href="mailto:contact@styleflex.com">
             Contact Us
           </a>
         </div>

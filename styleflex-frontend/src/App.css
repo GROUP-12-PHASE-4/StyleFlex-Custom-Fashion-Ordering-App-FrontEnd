@@ -1,45 +1,8 @@
-
 body {
   margin: 0;
   font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
   background-color: #f5f5f5;
   color: #222;
-}
-
-
-.auth-button {
-  background-color: #3b82f6;
-  color: white;
-  font-weight: 600;
-  padding: 0.5rem 1rem;
-  border-radius: 8px;
-  border: none;
-  cursor: pointer;
-  transition: background-color 0.2s ease-in-out;
-}
-
-.auth-button:hover {
-  background-color: #2563eb;
-}
-
-.auth-button:disabled {
-  background-color: #a5b4fc;
-  cursor: not-allowed;
-}
-
-
-.container {
-  max-width: 1024px;
-  margin: 0 auto;
-  padding: 1.5rem;
-}
-
-.card {
-  background-color: #fff;
-  border-radius: 12px;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
-  padding: 1.5rem;
-  margin-bottom: 2rem;
 }
 
 h1, h2, h3 {
@@ -52,6 +15,19 @@ h1, h2, h3 {
 }
 
 
+.container,
+.footer-container,
+.orders-container,
+.profile-container,
+.signup-container,
+.order-form-container,
+.login-container {
+  max-width: 1024px;
+  margin: 0 auto;
+  padding: 1.5rem;
+}
+
+
 .navbar {
   background-color: #1e3a8a;
   color: white;
@@ -61,24 +37,59 @@ h1, h2, h3 {
   align-items: center;
 }
 
-.navbar a {
+.navbar-title a {
+  color: white;
+  text-decoration: none;
+  font-size: 1.25rem;
+  font-weight: bold;
+}
+
+.navbar-links {
+  display: flex;
+  gap: 1.25rem;
+}
+
+.navbar-links a,
+.navbar-button {
   color: white;
   text-decoration: none;
   font-weight: 500;
-  margin-left: 1rem;
+  background: none;
+  border: none;
+  cursor: pointer;
+  font-size: 1rem;
 }
 
-.navbar a:hover {
+.navbar-links a:hover,
+.navbar-button:hover {
   text-decoration: underline;
 }
 
 
 .footer {
-  background-color: #1e3a8a;
-  color: #f9fafb;
-  padding: 1rem;
+  background-color: #f3f4f6;
+  color: #4b5563;
   text-align: center;
   font-size: 0.875rem;
+  padding: 1rem 0;
+  margin-top: 2.5rem;
+  border-top: 1px solid #e5e7eb;
+}
+
+.footer-links {
+  display: flex;
+  justify-content: center;
+  gap: 1.5rem;
+  margin-top: 0.5rem;
+}
+
+.footer-links a {
+  color: #4b5563;
+  text-decoration: none;
+}
+
+.footer-links a:hover {
+  text-decoration: underline;
 }
 
 
@@ -101,17 +112,229 @@ textarea:focus {
   box-shadow: 0 0 0 1px #2563eb;
 }
 
-.error-message {
+
+.auth-button,
+.login-button,
+.signup-button,
+.profile-button,
+.order-form-button,
+.order-button {
+  background-color: #2563eb;
+  color: white;
+  font-weight: 600;
+  padding: 0.75rem;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.auth-button:hover,
+.login-button:hover,
+.signup-button:hover,
+.profile-button:hover,
+.order-form-button:hover,
+.order-button:hover {
+  background-color: #1d4ed8;
+}
+
+
+.error-message,
+.login-error,
+.signup-error {
   color: #dc2626;
   font-size: 0.875rem;
-  margin-top: -0.5rem;
-  margin-bottom: 1rem;
   text-align: center;
 }
 
-.success-message {
+.success-message,
+.signup-success {
   color: #16a34a;
   font-size: 0.875rem;
-  margin-top: 1rem;
   text-align: center;
+}
+
+.card,
+.order-card,
+.admin-order-card {
+  background-color: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+  padding: 1.5rem;
+  margin-bottom: 1.5rem;
+}
+
+
+.orders-grid {
+  display: grid;
+  gap: 1.25rem;
+}
+
+.order-meta,
+.order-measurements,
+.order-status,
+.order-form-meta,
+.order-form-description {
+  font-size: 0.95rem;
+  color: #555;
+}
+
+.admin-order-actions {
+  margin-top: 0.75rem;
+  display: flex;
+  gap: 1rem;
+}
+
+.admin-button {
+  padding: 0.5rem 1rem;
+  border: none;
+  color: white;
+  border-radius: 6px;
+  font-weight: 500;
+  cursor: pointer;
+  font-size: 0.9rem;
+}
+
+.admin-button.complete {
+  background-color: #16a34a;
+}
+
+.admin-button.complete:hover {
+  background-color: #15803d;
+}
+
+.admin-button.delete {
+  background-color: #dc2626;
+}
+
+.admin-button.delete:hover {
+  background-color: #b91c1c;
+}
+
+
+.home-container {
+  text-align: center;
+  padding: 2.5rem 1rem;
+}
+
+.home-heading {
+  font-size: 2rem;
+  font-weight: 700;
+  color: #111827;
+  margin-bottom: 0.5rem;
+}
+
+.home-subtext {
+  font-size: 1rem;
+  color: #4b5563;
+}
+
+
+.not-found-container {
+  text-align: center;
+  margin-top: 5rem;
+}
+
+.not-found-title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #1f2937;
+}
+
+.not-found-message {
+  margin-top: 0.5rem;
+  color: #6b7280;
+  font-size: 1rem;
+}
+
+
+.disabled {
+  background-color: #a3a3a3 !important;
+  cursor: not-allowed;
+}
+
+.app-container {
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.main-content {
+  flex: 1;
+  padding: 1.5rem 1rem;
+  background-color: #f9f9f9;
+}
+.gallery-container {
+  max-width: 1200px;
+  margin: 2rem auto;
+  padding: 1.5rem;
+}
+
+.gallery-title {
+  font-size: 2rem;
+  font-weight: bold;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #1f2937;
+}
+
+.gallery-error {
+  color: #dc2626;
+  text-align: center;
+  font-size: 0.95rem;
+}
+
+.gallery-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 1.5rem;
+}
+
+.design-card {
+  border: 1px solid #e5e7eb;
+  border-radius: 8px;
+  padding: 1rem;
+  background-color: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.05);
+}
+
+.design-image {
+  width: 100%;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin-bottom: 1rem;
+}
+
+.design-title {
+  font-size: 1.2rem;
+  font-weight: 600;
+  margin-bottom: 0.25rem;
+}
+
+.design-category {
+  font-size: 0.9rem;
+  color: #6b7280;
+}
+
+.design-description {
+  font-size: 0.95rem;
+  color: #444;
+  margin-top: 0.5rem;
+}
+
+.order-button {
+  display: inline-block;
+  margin-top: 1rem;
+  background-color: #2563eb;
+  color: white;
+  padding: 0.5rem 1.25rem;
+  border-radius: 6px;
+  text-decoration: none;
+  font-weight: 600;
+  transition: background-color 0.2s ease-in-out;
+}
+
+.order-button:hover {
+  background-color: #1e40af;
 }
