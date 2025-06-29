@@ -45,7 +45,7 @@ function Orders() {
       <h1 className="orders-title">Your Orders</h1>
       {error && <p className="error-message">{error}</p>}
       {orders.length === 0 && !error ? (
-        <p className="orders-empty">No orders found or still loading...</p>
+        <p className="orders-empty">No orders found</p>
       ) : (
         <div className="orders-grid">
           {orders.map((order) => (

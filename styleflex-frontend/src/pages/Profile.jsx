@@ -1,6 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
-import "../App.css"; 
+import "../App.css";
 
 const Profile = () => {
   const [profile, setProfile] = useState({
@@ -9,6 +9,11 @@ const Profile = () => {
     password: "",
   });
   const [message, setMessage] = useState("");
+
+  // ✅ useEffect added to call fetchProfile when component mounts
+  useEffect(() => {
+    fetchProfile();
+  }, []);
 
   const fetchProfile = async () => {
     try {
