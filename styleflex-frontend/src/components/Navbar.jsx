@@ -1,19 +1,9 @@
 import { Link } from "react-router-dom";
-import { useState, useEffect } from "react";
+import { useContext } from "react";
+import { AuthContext } from "../context/AuthContext";
 
 function Navbar() {
-  const [isLoggedIn, setIsLoggedIn] = useState(false);
-
-  useEffect(() => {
-    const token = localStorage.getItem("access_token");
-    setIsLoggedIn(!!token);
-  }, []);
-
-  const handleLogout = () => {
-    localStorage.removeItem("access_token");
-    localStorage.removeItem("refresh_token");
-    window.location.href = "/login";
-  };
+  const { auth, logout } = useContext(AuthContext);
 
   return (
     <nav className="bg-blue-800 p-4 text-white flex justify-between items-center">
@@ -21,7 +11,7 @@ function Navbar() {
         <Link to="/">StyleFlex</Link>
       </h1>
       <div className="space-x-4">
-        {isLoggedIn ? (
+        {auth?.accessToken ? (
           <>
             <Link to="/orders" className="hover:underline">
               My Orders
@@ -29,7 +19,7 @@ function Navbar() {
             <Link to="/profile" className="hover:underline">
               Profile
             </Link>
-            <button onClick={handleLogout} className="hover:underline">
+            <button onClick={logout} className="hover:underline">
               Logout
             </button>
           </>
@@ -38,7 +28,7 @@ function Navbar() {
             <Link to="/login" className="hover:underline">
               Login
             </Link>
-            <Link to="/signup" className="hover:underline"> {/* ✅ corrected route */}
+            <Link to="/signup" className="hover:underline">
               Register
             </Link>
           </>

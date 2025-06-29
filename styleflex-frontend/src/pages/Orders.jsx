@@ -9,11 +9,14 @@ function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch("https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders", {
-          headers: {
-            Authorization: `Bearer ${auth.accessToken}`,
-          },
-        });
+        const res = await fetch(
+          "https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders",
+          {
+            headers: {
+              Authorization: `Bearer ${auth.accessToken}`,
+            },
+          }
+        );
 
         if (!res.ok) {
           const msg = await res.json();
@@ -41,7 +44,7 @@ function Orders() {
       <h1 className="text-3xl font-bold mb-6">Your Orders</h1>
       {error && <p className="text-red-500">{error}</p>}
       {orders.length === 0 && !error ? (
-        <p>No orders found.</p>
+        <p className="text-gray-500">No orders found or still loading...</p>
       ) : (
         <div className="grid gap-4">
           {orders.map((order) => (
