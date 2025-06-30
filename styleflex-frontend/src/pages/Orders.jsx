@@ -7,6 +7,10 @@ function Orders() {
   const { auth } = useContext(AuthContext);
   const [orders, setOrders] = useState([]);
   const [error, setError] = useState(null);
+  const [offerSent, setOfferSent] = useState(false);
+  const [randomDesigns, setRandomDesigns] = useState([]);
+  
+  const UNSPLASH_ACCESS_KEY = "SHGzlyVn6muY6ZN_JJi3_OKoa09hvSz_XsCCMeeWnkY";  
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -25,6 +29,18 @@ function Orders() {
       fetchOrders();
     }
   }, [auth?.accessToken]);
+
+  const fetchRandomDesigns = async () => {
+    try {
+      const res = await fetch(
+        `https://api.unsplash.com/search/photos?query=fashion+clothes&per_page=12&client_id=${UNSPLASH_ACCESS_KEY}`
+      );
+      const data = await res.json();
+      setRandomDesigns(data.results || []);
+    } catch (err) {
+      console.error("Error fetching designs:", err);
+    }
+  };
 
   const handleMakeOffer = async (orderId) => {
     console.log("Make Offer clicked for order:", orderId);
@@ -46,6 +62,9 @@ function Orders() {
 
       if (res.status === 200) {
         alert("✅ Offer sent successfully!");
+
+        setOfferSent(true);
+        fetchRandomDesigns();
       } else {
         alert("❌ Failed to send offer: " + (res.data?.message || "Unknown error"));
       }
@@ -54,6 +73,31 @@ function Orders() {
       alert("❌ Error sending offer. Please try again.");
     }
   };
+
+  if (offerSent) {
+    return (
+      <div className="orders-container">
+        <h1 className="orders-title">Discover New Fashion Designs</h1>
+        <div className="orders-grid">
+          {randomDesigns.length === 0 ? (
+            <p>Loading designs...</p>
+          ) : (
+            randomDesigns.map((design) => (
+              <div key={design.id} className="order-card">
+                <img
+                  src={design.urls.small}
+                  alt={design.alt_description || "Fashion design"}
+                  className="order-image"
+                />
+                <h2 className="order-title">{design.description || "Fashion Design"}</h2>
+                <p className="order-meta">By: {design.user.name}</p>
+              </div>
+            ))
+          )}
+        </div>
+      </div>
+    );
+  }
 
   return (
     <div className="orders-container">

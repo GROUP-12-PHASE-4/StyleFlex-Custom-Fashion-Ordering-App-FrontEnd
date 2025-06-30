@@ -338,3 +338,9 @@ textarea:focus {
 .order-button:hover {
   background-color: #1e40af;
 }
+.order-image {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  object-fit: cover;
+}
