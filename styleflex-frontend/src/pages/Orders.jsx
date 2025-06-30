@@ -1,6 +1,7 @@
 import { useEffect, useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
-import "../App.css"; 
+import API from "../services/api";
+import "../App.css";
 
 function Orders() {
   const { auth } = useContext(AuthContext);
@@ -10,22 +11,11 @@ function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await fetch(
-          "https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders",
-          {
-            headers: {
-              Authorization: `Bearer ${auth.accessToken}`,
-            },
-          }
-        );
-
-        if (!res.ok) {
-          const msg = await res.json();
-          throw new Error(msg.message || "Failed to fetch orders");
+        const res = await API.get("/orders");
+        if (res.status !== 200) {
+          throw new Error(res.data.message || "Failed to fetch orders");
         }
-
-        const data = await res.json();
-        setOrders(data);
+        setOrders(res.data);
       } catch (err) {
         setError(err.message);
       }
@@ -36,8 +26,30 @@ function Orders() {
     }
   }, [auth?.accessToken]);
 
-  const handleMakeOffer = (orderId) => {
-    console.log("Make offer for order:", orderId);
+  const handleMakeOffer = async (orderId) => {
+    console.log("Make Offer clicked for order:", orderId);
+
+    const offerPrice = prompt("Enter your offer price:");
+
+    if (!offerPrice || isNaN(offerPrice) || Number(offerPrice) <= 0) {
+      alert("Invalid price. Please enter a positive number.");
+      return;
+    }
+
+    try {
+      const res = await API.post(`/orders/${orderId}/offers`, {
+        price: Number(offerPrice)
+      });
+
+      if (res.status === 200) {
+        alert("✅ Offer sent successfully!");
+      } else {
+        alert("❌ Failed to send offer: " + (res.data?.message || "Unknown error"));
+      }
+    } catch (error) {
+      console.error("Error making offer:", error);
+      alert("❌ Error sending offer. Please try again.");
+    }
   };
 
   return (
@@ -61,9 +73,16 @@ function Orders() {
                 Ordered on: {new Date(order.created_at).toLocaleString()}
               </p>
               {order.measurements && (
-                <p className="order-measurements">
-                  <strong>Measurements:</strong> {order.measurements}
-                </p>
+                <div className="order-measurements">
+                  <strong>Measurements:</strong>
+                  <ul>
+                    {Object.entries(order.measurements).map(([key, value]) => (
+                      <li key={key}>
+                        {key}: {value}
+                      </li>
+                    ))}
+                  </ul>
+                </div>
               )}
 
               <button

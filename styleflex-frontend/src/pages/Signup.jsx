@@ -1,6 +1,7 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom'; // ✅ Import useNavigate
 import API from '../services/api';
-import '../App.css'; 
+import '../App.css';
 
 function Signup() {
   const [formData, setFormData] = useState({
@@ -12,24 +13,29 @@ function Signup() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  function handleChange(e) {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  }
+  const navigate = useNavigate(); // ✅ Initialize navigate
 
-  async function handleSubmit(e) {
+  const handleChange = (e) => {
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  const handleSubmit = async (e) => {
     e.preventDefault();
     setMessage('');
     setError('');
 
     try {
-      console.log("Submitting signup:", formData);
       const res = await API.post('/register', formData);
-      setMessage(res.data.message || 'Signup successful!');
+      setMessage(res.data.message || 'Signup successful! Redirecting...');
+      
+      setTimeout(() => {
+        navigate('/login');
+      }, 2000);
     } catch (err) {
       console.error(err);
       setError(err.response?.data?.message || 'Signup failed.');
     }
-  }
+  };
 
   return (
     <div className="signup-container">

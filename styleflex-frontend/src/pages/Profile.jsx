@@ -1,5 +1,5 @@
 import { useEffect, useState } from "react";
-import axios from "axios";
+import API from "../services/api";
 import "../App.css";
 
 const Profile = () => {
@@ -10,19 +10,13 @@ const Profile = () => {
   });
   const [message, setMessage] = useState("");
 
-  // ✅ useEffect added to call fetchProfile when component mounts
   useEffect(() => {
     fetchProfile();
   }, []);
 
   const fetchProfile = async () => {
     try {
-      const token = localStorage.getItem("access_token");
-      const response = await axios.get("/api/profile", {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      const response = await API.get("/profile");
       setProfile((prev) => ({
         ...prev,
         username: response.data.username,
@@ -41,17 +35,12 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      const token = localStorage.getItem("access_token");
-      await axios.put("/api/profile", profile, {
-        headers: {
-          Authorization: `Bearer ${token}`,
-        },
-      });
+      await API.put("/profile", profile);
       setMessage("✅ Profile updated successfully!");
       setProfile((prev) => ({ ...prev, password: "" }));
     } catch (err) {
-      setMessage("❌ Failed to update profile.");
       console.error(err);
+      setMessage("❌ Failed to update profile.");
     }
   };
 
