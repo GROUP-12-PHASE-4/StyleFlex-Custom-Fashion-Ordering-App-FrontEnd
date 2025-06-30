@@ -29,16 +29,19 @@ function Orders() {
   const handleMakeOffer = async (orderId) => {
     console.log("Make Offer clicked for order:", orderId);
 
-    const offerPrice = prompt("Enter your offer price:");
+    const offerPriceInput = prompt("Enter your offer price:");
 
-    if (!offerPrice || isNaN(offerPrice) || Number(offerPrice) <= 0) {
+    if (!offerPriceInput || isNaN(offerPriceInput) || Number(offerPriceInput) <= 0) {
       alert("Invalid price. Please enter a positive number.");
       return;
     }
 
+    const notesInput = prompt("Optional: Add any notes for this offer (or leave blank):") || "";
+
     try {
-      const res = await API.post(`/orders/${orderId}/offers`, {
-        price: Number(offerPrice)
+      const res = await API.post(`/orders/${orderId}/offer`, {
+        offer_price: Number(offerPriceInput),
+        notes: notesInput
       });
 
       if (res.status === 200) {
