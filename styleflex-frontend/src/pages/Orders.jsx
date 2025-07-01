@@ -63,11 +63,11 @@ function Orders() {
         setOfferSent(true);
         fetchRandomDesigns();
       } else {
-        alert("❌ Failed to send offer: " + (res.data?.message || "Unknown error"));
+        alert("Failed to send offer: " + (res.data?.message || "Unknown error"));
       }
     } catch (error) {
       console.error("Error making offer:", error);
-      alert("❌ Error sending offer. Please try again.");
+      alert("Error sending offer. Please try again.");
     }
   };
 

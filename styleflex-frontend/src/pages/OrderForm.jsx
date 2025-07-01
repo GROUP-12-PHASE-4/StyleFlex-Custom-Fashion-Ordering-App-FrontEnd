@@ -14,7 +14,7 @@ function OrderForm() {
   const token = localStorage.getItem("access_token");
 
   useEffect(() => {
-    API.get("/designs")  // ✅ Removed /api
+    API.get("/designs") 
       .then((res) => {
         const found = res.data.find((d) => d.id === parseInt(id));
         if (found) setDesign(found);
@@ -30,7 +30,7 @@ function OrderForm() {
 
     try {
       await API.post(
-        "/orders",  // ✅ Removed /api
+        "/orders",  
         {
           design_id: parseInt(id),
           size: size.trim(),
@@ -43,7 +43,7 @@ function OrderForm() {
         }
       );
 
-      alert("✅ Order placed successfully!");
+      alert("Order placed successfully!");
       navigate("/orders");
     } catch (err) {
       const msg = err.response?.data?.message || "Order failed.";

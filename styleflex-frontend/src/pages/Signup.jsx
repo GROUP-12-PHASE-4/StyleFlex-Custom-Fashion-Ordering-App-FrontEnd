@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom'; // ✅ Import useNavigate
+import { useNavigate } from 'react-router-dom';
 import API from '../services/api';
 import '../App.css';
 
@@ -13,7 +13,7 @@ function Signup() {
   const [message, setMessage] = useState('');
   const [error, setError] = useState('');
 
-  const navigate = useNavigate(); // ✅ Initialize navigate
+  const navigate = useNavigate();
 
   const handleChange = (e) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });

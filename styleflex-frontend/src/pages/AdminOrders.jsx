@@ -17,7 +17,7 @@ const AdminOrders = () => {
       });
       setOrders(response.data);
     } catch (err) {
-      console.error("❌ Failed to fetch orders", err);
+      console.error("Failed to fetch orders", err);
     }
   };
 
@@ -37,7 +37,7 @@ const AdminOrders = () => {
       );
       fetchOrders();
     } catch (err) {
-      console.error("❌ Failed to update status", err);
+      console.error("Failed to update status", err);
     }
   };
 
@@ -52,7 +52,7 @@ const AdminOrders = () => {
       });
       fetchOrders();
     } catch (err) {
-      console.error("❌ Failed to delete order", err);
+      console.error("Failed to delete order", err);
     }
   };
 

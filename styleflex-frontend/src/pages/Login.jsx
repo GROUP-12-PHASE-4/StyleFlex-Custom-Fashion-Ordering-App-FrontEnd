@@ -1,7 +1,7 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import API from "../services/api"; // ✅ Use axios instance
+import API from "../services/api"; 
 import "../App.css";
 
 function Login() {
@@ -27,7 +27,7 @@ function Login() {
     setError(null);
 
     try {
-      const res = await API.post("/auth/login", formData); // ✅ Correct endpoint
+      const res = await API.post("/auth/login", formData); 
 
       const { access_token, refresh_token, user } = res.data;
 

@@ -16,7 +16,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await API.get("/auth/profile"); // ✅ corrected
+      const response = await API.get("/auth/profile"); 
       setProfile((prev) => ({
         ...prev,
         username: response.data.username,
@@ -24,7 +24,7 @@ const Profile = () => {
       }));
     } catch (err) {
       console.error("Failed to load profile", err);
-      setMessage("❌ Failed to load profile.");
+      setMessage("Failed to load profile.");
     }
   };
 
@@ -35,12 +35,12 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.put("/auth/profile", profile); // ✅ corrected
-      setMessage("✅ Profile updated successfully!");
+      await API.put("/auth/profile", profile);
+      setMessage("Profile updated successfully!");
       setProfile((prev) => ({ ...prev, password: "" }));
     } catch (err) {
       console.error(err);
-      setMessage("❌ Failed to update profile.");
+      setMessage("Failed to update profile.");
     }
   };
 
