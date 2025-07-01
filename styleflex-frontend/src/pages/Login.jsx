@@ -1,7 +1,8 @@
 import { useState, useContext } from "react";
 import { AuthContext } from "../context/AuthContext";
 import { useNavigate } from "react-router-dom";
-import "../App.css"; 
+import API from "../services/api"; // ✅ Use axios instance
+import "../App.css";
 
 function Login() {
   const { setAuth } = useContext(AuthContext);
@@ -26,31 +27,22 @@ function Login() {
     setError(null);
 
     try {
-      const res = await fetch("https://styleflex-custom-fashion-ordering-app.onrender.com/api/login", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
-        body: JSON.stringify(formData),
-      });
+      const res = await API.post("/auth/login", formData); // ✅ Correct endpoint
 
-      const data = await res.json();
+      const { access_token, refresh_token, user } = res.data;
 
-      if (!res.ok) {
-        throw new Error(data.message || "Login failed");
-      }
-
-      localStorage.setItem("access_token", data.access_token);
+      localStorage.setItem("access_token", access_token);
+      localStorage.setItem("refresh_token", refresh_token);
 
       setAuth({
         isAuthenticated: true,
-        accessToken: data.access_token,
-        user: data.user || null,
+        accessToken: access_token,
+        user: user || null,
       });
 
       navigate("/orders");
     } catch (err) {
-      setError(err.message);
+      setError(err.response?.data?.message || "Login failed.");
     }
   };
 

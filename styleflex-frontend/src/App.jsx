@@ -25,6 +25,7 @@ function App() {
             <Route path="/login" element={<Login />} />
             <Route path="/signup" element={<Signup />} />
             <Route path="/designs" element={<DesignGallery />} />
+
             <Route
               path="/orders"
               element={
@@ -33,9 +34,34 @@ function App() {
                 </ProtectedRoute>
               }
             />
-            <Route path="/order/:id" element={<OrderForm />} />
-            <Route path="/admin/orders" element={<AdminOrders />} />
-            <Route path="/profile" element={<Profile />} />
+
+            <Route
+              path="/order/:id"
+              element={
+                <ProtectedRoute>
+                  <OrderForm />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/admin/orders"
+              element={
+                <ProtectedRoute>
+                  <AdminOrders />
+                </ProtectedRoute>
+              }
+            />
+
+            <Route
+              path="/profile"
+              element={
+                <ProtectedRoute>
+                  <Profile />
+                </ProtectedRoute>
+              }
+            />
+
             <Route path="*" element={<NotFound />} />
           </Routes>
         </main>

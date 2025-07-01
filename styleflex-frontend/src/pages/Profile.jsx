@@ -16,7 +16,7 @@ const Profile = () => {
 
   const fetchProfile = async () => {
     try {
-      const response = await API.get("/profile");
+      const response = await API.get("/auth/profile"); // ✅ corrected
       setProfile((prev) => ({
         ...prev,
         username: response.data.username,
@@ -35,7 +35,7 @@ const Profile = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await API.put("/profile", profile);
+      await API.put("/auth/profile", profile); // ✅ corrected
       setMessage("✅ Profile updated successfully!");
       setProfile((prev) => ({ ...prev, password: "" }));
     } catch (err) {

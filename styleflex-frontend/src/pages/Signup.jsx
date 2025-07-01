@@ -25,7 +25,7 @@ function Signup() {
     setError('');
 
     try {
-      const res = await API.post('/register', formData);
+      const res = await API.post('/auth/register', formData);
       setMessage(res.data.message || 'Signup successful! Redirecting...');
       
       setTimeout(() => {

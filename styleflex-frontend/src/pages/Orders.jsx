@@ -9,8 +9,8 @@ function Orders() {
   const [error, setError] = useState(null);
   const [offerSent, setOfferSent] = useState(false);
   const [randomDesigns, setRandomDesigns] = useState([]);
-  
-  const UNSPLASH_ACCESS_KEY = "SHGzlyVn6muY6ZN_JJi3_OKoa09hvSz_XsCCMeeWnkY";  
+
+  const UNSPLASH_ACCESS_KEY = "SHGzlyVn6muY6ZN_JJi3_OKoa09hvSz_XsCCMeeWnkY";
 
   useEffect(() => {
     const fetchOrders = async () => {
@@ -43,8 +43,6 @@ function Orders() {
   };
 
   const handleMakeOffer = async (orderId) => {
-    console.log("Make Offer clicked for order:", orderId);
-
     const offerPriceInput = prompt("Enter your offer price:");
 
     if (!offerPriceInput || isNaN(offerPriceInput) || Number(offerPriceInput) <= 0) {
@@ -57,12 +55,11 @@ function Orders() {
     try {
       const res = await API.post(`/orders/${orderId}/offer`, {
         offer_price: Number(offerPriceInput),
-        notes: notesInput
+        notes: notesInput,
       });
 
       if (res.status === 200) {
         alert("✅ Offer sent successfully!");
-
         setOfferSent(true);
         fetchRandomDesigns();
       } else {
@@ -107,39 +104,50 @@ function Orders() {
         <p className="orders-empty">No orders found</p>
       ) : (
         <div className="orders-grid">
-          {orders.map((order) => (
-            <div key={order.id} className="order-card">
-              <h2 className="order-title">
-                {order.design?.title || "No Design Info"}
-              </h2>
-              <p className="order-meta">
-                Size: {order.size} | Status:{" "}
-                <span className="order-status">{order.status}</span>
-              </p>
-              <p className="order-meta">
-                Ordered on: {new Date(order.created_at).toLocaleString()}
-              </p>
-              {order.measurements && (
-                <div className="order-measurements">
-                  <strong>Measurements:</strong>
-                  <ul>
-                    {Object.entries(order.measurements).map(([key, value]) => (
-                      <li key={key}>
-                        {key}: {value}
-                      </li>
-                    ))}
-                  </ul>
-                </div>
-              )}
+          {orders.map((order) => {
+            let measurements = order.measurements;
+            try {
+              if (typeof measurements === "string") {
+                measurements = JSON.parse(measurements);
+              }
+            } catch (e) {
+              console.error("Invalid measurements JSON", e);
+              measurements = null;
+            }
 
-              <button
-                className="order-button"
-                onClick={() => handleMakeOffer(order.id)}
-              >
-                Make Offer
-              </button>
-            </div>
-          ))}
+            return (
+              <div key={order.id} className="order-card">
+                <h2 className="order-title">{order.design?.title || "No Design Info"}</h2>
+                <p className="order-meta">
+                  Size: {order.size} | Status:{" "}
+                  <span className="order-status">{order.status}</span>
+                </p>
+                <p className="order-meta">
+                  Ordered on: {new Date(order.created_at).toLocaleString()}
+                </p>
+
+                {measurements && (
+                  <div className="order-measurements">
+                    <strong>Measurements:</strong>
+                    <ul>
+                      {Object.entries(measurements).map(([key, value]) => (
+                        <li key={key}>
+                          {key}: {value}
+                        </li>
+                      ))}
+                    </ul>
+                  </div>
+                )}
+
+                <button
+                  className="order-button"
+                  onClick={() => handleMakeOffer(order.id)}
+                >
+                  Make Offer
+                </button>
+              </div>
+            );
+          })}
         </div>
       )}
     </div>

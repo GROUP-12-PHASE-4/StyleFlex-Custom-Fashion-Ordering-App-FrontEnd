@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import API from "../services/api";
 import "../App.css";
 
 function DesignGallery() {
@@ -9,15 +10,10 @@ function DesignGallery() {
   useEffect(() => {
     const fetchDesigns = async () => {
       try {
-        const res = await fetch("https://styleflex-custom-fashion-ordering-app.onrender.com/api/designs");
-        if (!res.ok) {
-          const msg = await res.json();
-          throw new Error(msg.message || "Failed to fetch designs");
-        }
-        const data = await res.json();
-        setDesigns(data);
+        const res = await API.get("/designs");
+        setDesigns(res.data);
       } catch (err) {
-        setError(err.message);
+        setError(err.response?.data?.message || "Failed to fetch designs");
       }
     };
     fetchDesigns();

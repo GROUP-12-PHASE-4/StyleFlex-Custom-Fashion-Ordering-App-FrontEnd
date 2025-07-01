@@ -14,6 +14,7 @@ function Navbar() {
       <div className="navbar-links">
         {auth?.accessToken ? (
           <>
+            <Link to="/designs">Designs</Link>
             <Link to="/orders">My Orders</Link>
             <Link to="/profile">Profile</Link>
             <button onClick={logout} className="navbar-button">Logout</button>
