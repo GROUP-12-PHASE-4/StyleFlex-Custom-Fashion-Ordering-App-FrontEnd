@@ -8,7 +8,7 @@ const AdminOrders = () => {
   const fetchOrders = async () => {
     try {
       const token = localStorage.getItem("access_token");
-      const response = await axios.get("https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders", {
+      const response = await axios.get("https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders/", {
         headers: {
           Authorization: `Bearer ${token}`,
           "Content-Type": "application/json"
@@ -25,7 +25,7 @@ const AdminOrders = () => {
     try {
       const token = localStorage.getItem("access_token");
       await axios.put(
-        `https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders/${orderId}`,
+        `https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders/${orderId}/`,
         { status: newStatus },
         {
           headers: {
@@ -44,7 +44,7 @@ const AdminOrders = () => {
   const deleteOrder = async (orderId) => {
     try {
       const token = localStorage.getItem("access_token");
-      await axios.delete(`https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders/${orderId}`, {
+      await axios.delete(`https://styleflex-custom-fashion-ordering-app.onrender.com/api/orders/${orderId}/`, {
         headers: {
           Authorization: `Bearer ${token}`,
         },

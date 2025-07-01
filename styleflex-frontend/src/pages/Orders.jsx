@@ -15,7 +15,7 @@ function Orders() {
   useEffect(() => {
     const fetchOrders = async () => {
       try {
-        const res = await API.get("/orders");
+        const res = await API.get("/orders/");
         if (res.status !== 200) {
           throw new Error(res.data.message || "Failed to fetch orders");
         }
@@ -53,7 +53,7 @@ function Orders() {
     const notesInput = prompt("Optional: Add any notes for this offer (or leave blank):") || "";
 
     try {
-      const res = await API.post(`/orders/${orderId}/offer`, {
+      const res = await API.post(`/orders/${orderId}/offer/`, {
         offer_price: Number(offerPriceInput),
         notes: notesInput,
       });
